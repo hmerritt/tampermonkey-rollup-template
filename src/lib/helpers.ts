@@ -3,21 +3,22 @@
  *
  * @example
  * // window.location.href = "https://www.imdb.com/title/tt0040725"
- * matchUrl("imdb.com") // true
- * matchUrl("/title/") // true
- * matchUrl("/name/") // false
+ * matchUrl("imdb.com")               // true
+ * matchUrl(["imdb.com", "/title/"])  // true
+ * matchUrls(["imdb.com", "/name/"])  // false
  */
 export const matchUrl = (
-    url: string,
+    url: string | string[],
     locationItem = "href",
     isEncoded = false
 ) => {
     try {
+        if (typeof url === "string") url = [url];
         let href = window?.location?.[locationItem];
         if (isEncoded) href = btoa(href);
-        return href?.includes(url);
+        return url.every((url) => href?.includes(url));
     } catch (error) {
-        console.log(error);
+        console.error("matchUrl", error);
         return false;
     }
 };
@@ -32,11 +33,11 @@ export const matchUrl = (
  * matchUrls(["imdb.com", "/title/", "/tt0033467"]) // false
  */
 export const matchUrls = (
-    urls: string[],
+    urls: (string | string[])[],
     locationItem = "href",
     isEncoded = false
 ) => {
-    return urls.every((url) => matchUrl(url, locationItem, isEncoded));
+    return urls.some((url) => matchUrl(url, locationItem, isEncoded));
 };
 
 export const select = (selector: string) => {
