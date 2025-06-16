@@ -1,5 +1,5 @@
 import chokidar from "chokidar";
-import { BuildOptions, build } from "rolldown";
+import { OutputOptions, rolldown } from "rolldown";
 
 import { execSync, patchBuild } from "./build/build-lib";
 import pkg from "./package.json";
@@ -38,7 +38,9 @@ chokidar.watch("./src").on("change", async (path) => {
         }
     }
 
-    await build(rolldownConfig as BuildOptions);
+    const bundle = await rolldown(rolldownConfig);
+    await bundle.write(rolldownConfig.output as OutputOptions);
+
     await patchBuild(true);
 
     const duration = Date.now() - _internal.start;

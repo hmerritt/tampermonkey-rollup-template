@@ -4,6 +4,7 @@ import pkg from "./package.json" assert { type: "json" };
 // https://rollupjs.org/introduction/
 export default defineConfig({
     input: "src/index.ts",
+    plugins: [],
     output: {
         file: pkg.tampermonkey.outputFile,
         format: "iife",
@@ -13,5 +14,4 @@ export default defineConfig({
     watch: {
         include: "src/**",
     },
-    plugins: [],
 });
