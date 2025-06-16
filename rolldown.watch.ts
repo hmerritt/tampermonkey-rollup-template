@@ -24,7 +24,7 @@ const _internal = {
     start: 0
 };
 
-chokidar.watch("./src").on("change", async (path, event) => {
+chokidar.watch("./src").on("change", async (path) => {
     _internal.count++;
     _internal.start = Date.now();
     console.log(`Found ${path} changed, rebuilding...`);
