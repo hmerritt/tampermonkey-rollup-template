@@ -8,4 +8,4 @@
 // @match        */*
 // @grant        none
 // ==/UserScript==
-!function(){"use strict";console.log("Hello, world!")}();
+(function(){let e=()=>{console.log(`Hello, world!`)};e()})();
