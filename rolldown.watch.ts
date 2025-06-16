@@ -12,11 +12,13 @@ const config = {
 };
 
 console.log("Watching for changes...");
-console.log(
-    "\x1b[33m",
-    "⚠  Type checks and linting won't run while in watch mode. It is recommended to run `yarn build` afterwards.",
-    "\x1b[0m"
-);
+if (!config.shouldLint) {
+    console.log(
+        "\x1b[33m",
+        "⚠  Type checks and linting won't run while in watch mode. It is recommended to run `yarn build` afterwards.",
+        "\x1b[0m"
+    );
+}
 console.log("");
 
 const _internal = {
