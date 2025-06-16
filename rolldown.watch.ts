@@ -1,0 +1,46 @@
+import chokidar from "chokidar";
+import { BuildOptions, build } from "rolldown";
+
+import { execSync, patchBuild } from "./build/build-lib";
+import pkg from "./package.json";
+import rolldownConfig from "./rolldown.config.ts";
+
+const config = {
+    // Run lint before build,
+    // @Note: This is very slow
+    shouldLint: false
+};
+
+console.log("Watching for changes...");
+console.log(
+    "\x1b[33m",
+    "⚠  Type checks and linting won't run while in watch mode. It is recommended to run `yarn build` afterwards.",
+    "\x1b[0m"
+);
+console.log("");
+
+const _internal = {
+    count: 0,
+    start: 0
+};
+
+chokidar.watch("./src").on("change", async (path, event) => {
+    _internal.count++;
+    _internal.start = Date.now();
+    console.log(`Found ${path} changed, rebuilding...`);
+
+    if (config.shouldLint) {
+        const { output: lintOutput, exitCode: lintExitCode } = execSync("yarn lint");
+        if (lintExitCode !== 0) {
+            console.log("❌ Linting failed");
+            console.log(lintOutput);
+            return;
+        }
+    }
+
+    await build(rolldownConfig as BuildOptions);
+    await patchBuild(true);
+
+    const duration = Date.now() - _internal.start;
+    console.log(`✅ Rebuilt ${pkg.tampermonkey.outputFile} in ${duration}ms`);
+});
