@@ -1,16 +1,16 @@
-# Tampermonkey Rollup Template
+# Tampermonkey Template - with Typescript & Rolldown
 
-Template repo for creating Tampermonkey scripts with Rollup.
+Template repo for creating Tampermonkey scripts with Typescript and Rolldown.
 
 ![](./example.gif)
 
 ## Features ⚡
 
--   TypeScript
--   Rollup for bundling
-    -   Minification
-    -   Allows use of npm packages
--   Patch script for Tampermonkey metadata
+- [TypeScript](https://www.typescriptlang.org)
+- [Rolldown](https://rolldown.rs) for bundling
+    - Minification
+    - Allows use of npm packages
+- Patch script for Tampermonkey metadata
 
 ## Development 👨‍💻
 
