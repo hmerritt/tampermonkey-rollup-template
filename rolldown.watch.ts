@@ -1,9 +1,9 @@
 import chokidar from "chokidar";
 import { OutputOptions, rolldown } from "rolldown";
 
-import { execSync, patchBuild } from "./build/build-lib";
 import pkg from "./package.json";
 import rolldownConfig from "./rolldown.config.ts";
+import { execSync, patchBuild } from "./scripts/build/build-lib";
 
 const config = {
     // Run lint before build,

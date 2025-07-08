@@ -2,7 +2,7 @@ import { execSync as nodeExecSync } from "child_process";
 import pathfs from "path";
 import prependFile from "prepend-file";
 
-import pkg from "../package.json";
+import pkg from "../../package.json";
 
 export const pkgValue = (key: string) =>
     pkg?.tampermonkey?.[key] || pkg[key as keyof typeof pkg] || "";
@@ -28,7 +28,9 @@ export const execSync = (
 export const patchBuild = async (silent = false) => {
     if (!silent) console.log(`> Patching build`);
 
-    if (!silent) console.log(`> Adding META data to  output file`);
+    // @TODO:
+    // @run-at       document-start
+
     await prependFile(
         pluginOutputFile,
         `// ==UserScript==
@@ -40,9 +42,11 @@ export const patchBuild = async (silent = false) => {
 // @downloadURL  ${pkgValue("downloadURL")}
 // @match        */*
 // @grant        none
+// @run-at       document-start
 // ==/UserScript==
 `
     );
 
-    if (!silent) console.log("> Patching complete :)");
+    if (!silent)
+        console.log(`✔ Finished script ${pkgValue("name")} v${pkgValue("version")}`);
 };
