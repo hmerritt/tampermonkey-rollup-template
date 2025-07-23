@@ -37,6 +37,7 @@
         "author": "Harry Merritt",
         "outputFile": "tampermonkey-rollup-template.user.js",
         "updateURL": "https://raw.githubusercontent.com/hmerritt/tampermonkey-rollup-template/refs/heads/master/tampermonkey-rollup-template.user.js",
-        "downloadURL": "https://raw.githubusercontent.com/hmerritt/tampermonkey-rollup-template/refs/heads/master/tampermonkey-rollup-template.user.js"
+        "downloadURL": "https://raw.githubusercontent.com/hmerritt/tampermonkey-rollup-template/refs/heads/master/tampermonkey-rollup-template.user.js",
+        "icon": "https://upload.wikimedia.org/wikipedia/commons/b/ba/Tampermonkey_logo.png"
     }
 }

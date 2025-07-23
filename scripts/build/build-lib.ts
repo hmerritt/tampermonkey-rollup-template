@@ -28,9 +28,6 @@ export const execSync = (
 export const patchBuild = async (silent = false) => {
     if (!silent) console.log(`> Patching build`);
 
-    // @TODO:
-    // @run-at       document-start
-
     await prependFile(
         pluginOutputFile,
         `// ==UserScript==
@@ -43,6 +40,7 @@ export const patchBuild = async (silent = false) => {
 // @match        */*
 // @grant        none
 // @run-at       document-start
+// compiledOn    ${new Date().toLocaleString()}
 // ==/UserScript==
 `
     );
